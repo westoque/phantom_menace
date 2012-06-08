@@ -43,3 +43,30 @@ When the server is running, run the example by doing.
 ```sh
 bundle exec ruby examples/simple.rb
 ```
+
+## Running The Tests
+
+Unfortunately, we still don't have an automated test suite to run the
+different services.
+
+We have to run three things.
+
+1. The `phantom_menace` binary
+
+```sh
+bundle exec ./bin/phantom_menace
+```
+
+2. The sinatra test server - This serves the files needed for the tests
+   instead of hitting third party sites. This ensures that we can run
+   the tests without internet.
+
+```sh
+bundle exec ruby ./spec/test_server/server.rb
+```
+
+3. Finally we can run the specs
+
+```sh
+bundle exec rake spec
+```
