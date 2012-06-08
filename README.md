@@ -16,6 +16,15 @@ gem install phantom-menace
 
 ## Getting Started
 
+You have to run the phantomjs server first. This server accepts JSON
+commands.
+
+```sh
+phantom_menace
+```
+
+You can then run a quick example:
+
 ```ruby
 require "phantom_menace"
 
@@ -29,7 +38,7 @@ end
 
 ## Running The Example
 
-Run the example by doing.
+When the server is running, run the example by doing.
 
 ```sh
 bundle exec ruby examples/simple.rb
