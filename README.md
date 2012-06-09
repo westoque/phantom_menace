@@ -1,4 +1,4 @@
-# phantom-menace
+# phantom_menace
 
 A real headless "browser." It uses phantomjs and provides an API like a
 real browser does. Much like poltergeist but decoupled from capybara.
@@ -11,7 +11,7 @@ It is perfect for scraping or doing any browser related tasks.
 ## Install
 
 ```sh
-gem install phantom-menace
+gem install phantom_menace
 ```
 
 ## Getting Started
