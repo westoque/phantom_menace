@@ -24,7 +24,15 @@ describe PhantomMenace::Browser do
 
   describe "#find" do
     it "responds with the links in the page" do
-      pending "Still working on it"
+      @browser.goto TEST_URL
+      resp = @browser.find('a')
+      resp.length.should_not be(0)
+    end
+
+    it "responds with a blank array if nothing found" do
+      @browser.goto TEST_URL
+      resp = @browser.find('.non-existing-class')
+      resp.should be_empty
     end
   end
 

@@ -26,20 +26,21 @@ class Browser
   click: (left, top) ->
     @page.sendEvent left, top
 
-  find: (selector) ->
+  find: (data) ->
     console.log 'Finding it'
-
-    ret = @page.evaluate ->
+    onEvaluate = (eArgs) ->
       elements = []
-      jQuery('a').each (i, obj) ->
+      jQuery(eArgs.selector).each (i, obj) ->
         attrs = {}
         attrs[attr.name] = attr.value for attr in obj.attributes
-
         elements.push
           attrs: attrs
           text:  jQuery(obj).text()
           pos:   jQuery(obj).offset()
       elements
+
+    console.log 'data.selector: ' + data.selector
+    ret = @page.evaluate(onEvaluate, { selector: data.selector })
 
     @resp =
       success: true
@@ -54,8 +55,8 @@ class Browser
   goforward: ->
     console.log 'Going forward a page'
 
-  goto: (url) ->
-    @page.open decodeURIComponent(url)
+  goto: (data) ->
+    @page.open decodeURIComponent(data.url)
 
   goback: ->
     this.goto @history.pop
@@ -118,7 +119,7 @@ class Server
     @server.listen 8080, this._handleRequest
 
   _handleRequest: (req, res) =>
-    params = req.post
+    params = JSON.parse(req.post.payload)
 
     if @browser[params.command]
       @browser.runCommand(params.command, params.data)
