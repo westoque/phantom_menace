@@ -23,9 +23,9 @@ describe PhantomMenace::Browser do
   end
 
   describe "#find" do
-    it "responds with the links in the page" do
+    it "responds with the element found" do
       @browser.goto TEST_URL
-      resp = @browser.find('a')
+      resp = @browser.find('#first_div')
       resp.length.should_not be(0)
     end
 
