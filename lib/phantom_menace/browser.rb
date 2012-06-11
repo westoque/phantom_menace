@@ -45,6 +45,18 @@ module PhantomMenace
       end
     end
 
+    # Renders the loaded page in the specified path,
+    # if path is not given, defaults to the current
+    # directory.
+    def render(filename = nil)
+      filename ||= File.expand_path("../", __FILE__) + "/screenshot.png"
+      options = {
+        command: "render",
+        data: { filename: filename }
+      }
+      post(options)
+    end
+
     private
 
     def post(options)

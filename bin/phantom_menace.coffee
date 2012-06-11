@@ -1,17 +1,6 @@
 USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) ' +
   'AppleWebKit/A.B (KHTML, like Gecko) Chrome/X.Y.Z.W Safari/A.B.'
 
-class Page
-  constructor: ->
-    @_loaded = false
-    @_page = require('webpage').create()
-
-  open: (url) ->
-    @_page.open url
-
-  isLoaded: ->
-    @_loaded
-
 class Browser
   constructor: ->
     # This is the response container
@@ -39,7 +28,6 @@ class Browser
           pos:   jQuery(obj).offset()
       elements
 
-    console.log 'data.selector: ' + data.selector
     ret = @page.evaluate(onEvaluate, { selector: data.selector })
 
     @resp =
@@ -47,10 +35,6 @@ class Browser
       ret: ret
 
     @state = 'default'
-
-
-  findAll: ->
-    console.log 'Finding all'
 
   goforward: ->
     console.log 'Going forward a page'
@@ -67,8 +51,10 @@ class Browser
   reload: ->
     this.goto @history[@history.length - 1]
 
-  render: ->
-    @page.render()
+  render: (data) ->
+    @page.render(data.filename)
+    @resp = success: true
+    @state = 'default'
 
   content: ->
     @page.content
@@ -126,16 +112,14 @@ class Server
       this._runLoop(req, res)
     else
       res.statusCode = 200
-      res.write JSON.stringify({
+      res.write JSON.stringify
         success: false
         message: "Command not found"
-      })
       res.close()
 
   _runLoop: (req, res) =>
     setTimeout =>
       console.log 'THE STATE: ' + @browser.state
-
       if @browser.state is 'loading'
         this._runLoop(req, res)
       else if @browser.state is 'default'

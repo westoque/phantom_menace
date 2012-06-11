@@ -18,7 +18,7 @@ describe PhantomMenace::Browser do
     it "responds with the links in the page" do
       @browser.goto TEST_URL
       resp = @browser.find_all_links
-      resp.length.should_not be(0)
+      resp.length.should_not == 0
     end
   end
 
@@ -26,7 +26,7 @@ describe PhantomMenace::Browser do
     it "responds with the element found" do
       @browser.goto TEST_URL
       resp = @browser.find('#first_div')
-      resp.length.should_not be(0)
+      resp.length.should_not == 0
     end
 
     it "responds with a blank array if nothing found" do
@@ -38,7 +38,9 @@ describe PhantomMenace::Browser do
 
   describe "#render" do
     it "saves the file in the path specified" do
-      pending "Still working on it"
+      @browser.goto TEST_URL
+      resp = @browser.render
+      resp["success"].should == true
     end
   end
 end
