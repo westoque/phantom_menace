@@ -3,17 +3,19 @@ require "uri"
 require "json"
 
 module PhantomMenace
-  # == PhantomMenace Browser
+  # PhantomMenace::Browser
   #
-  # Creates a Browser that you can interact with.
+  # Creates a Browser that you can interact with. Exposes methods like
+  # how you would find a real browser.
   #
-  # Example:
+  # == Example
   #
   #   browser = PhantomMenace::Browser.new
   #   browser.goto "http://facebook.com"
   #
   # Look at the API for more methods.
   class Browser
+    # Navigates to the specified URL.
     def goto(url)
       options = {
         command: "goto",
@@ -32,6 +34,7 @@ module PhantomMenace
       end
     end
 
+    # Uses jQuery's selector method. `$(sel)`
     def find(sel)
       options = {
         command: "find",
