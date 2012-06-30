@@ -45,6 +45,15 @@ module PhantomMenace
       end
     end
 
+    # Uses jQuery's selector method. `$(sel)`
+    def content
+      options = {
+        command: "content",
+        data: {}
+      }
+      post(options)["ret"]
+    end
+
     # Renders the loaded page in the specified path,
     # if path is not given, defaults to the current
     # directory.

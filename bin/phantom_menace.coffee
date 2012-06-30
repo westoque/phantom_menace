@@ -57,7 +57,10 @@ class Browser
     @state = 'default'
 
   content: ->
-    @page.content
+    @resp =
+      success: true
+      ret: @page.content
+    @state = 'default'
 
   reset: ->
     @page.release()
