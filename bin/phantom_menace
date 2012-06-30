@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-
-require 'phantomjs'
-
-p "=> Server running at 8080"
-file = File.expand_path(File.dirname(__FILE__)) + '/phantom_menace.coffee'
-Phantomjs.run file

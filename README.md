@@ -20,7 +20,7 @@ You have to run the phantomjs server first. This server accepts JSON
 commands.
 
 ```sh
-phantom_menace
+phantomjs bin/phantom_menace.coffee
 ```
 
 You can then run a quick example:
@@ -54,7 +54,7 @@ We have to run three things.
 1. The `phantom_menace` binary
 
 ```sh
-bundle exec ./bin/phantom_menace
+phantomjs bin/phantom_menace.coffee
 ```
 
 2. The sinatra test server - This serves the files needed for the tests
